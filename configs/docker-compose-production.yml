@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  app-web:
+    build: .
+    image: app-web
+    container_name: app-web
+    command: sh -c "python manage.py migrate && python setup.py && gunicorn --workers=4 app.wsgi --bind 0.0.0.0:8000"
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=production
+    restart: on-failure
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    restart: always
+    working_dir: /nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./static:/nginx/static
+      - ./configs/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app-web
+
+volumes:
+  app-db-data:
