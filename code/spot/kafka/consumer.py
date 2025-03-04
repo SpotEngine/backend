@@ -19,5 +19,6 @@ def kafka_concumer(callback: callable):
             print("Consumer error: {}".format(msg.error()))
             continue
         msg_value = msg.value().decode('utf-8')
-        # print(msg_value)
+        print("received:", msg_value)
         callback(msg_value)
+        print("processed:", msg_value)
