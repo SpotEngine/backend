@@ -89,7 +89,7 @@ KAFKA_BASE_CONF = {
 }
 KAFKA_CONSUMER_CONFIG = {
     **KAFKA_BASE_CONF, 
-    'group.instance.id': f'instance-{os.uname().nodename}',  # Use hostname as client ID
+    # 'group.instance.id': f'instance-{os.uname().nodename}',  # Use hostname as client ID
     'auto.offset.reset': 'earliest',
     'session.timeout.ms': 6000,
     'heartbeat.interval.ms': 3000,    
