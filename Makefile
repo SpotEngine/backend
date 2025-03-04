@@ -13,20 +13,20 @@ db:
 	docker compose up -d app-db 
 
 dev:
-	docker compose up -d --build --remove-orphans zoo1 kafka1 web nginx spot && docker compose logs -f -n 5 
+	docker compose up -d --build --remove-orphans web nginx spot && docker compose logs -f -n 5 
 
 dev-web:
-	docker compose up -d --build --remove-orphans app-web && docker logs -f -n 5 app-web
+	docker compose up -d --build --remove-orphans web && docker logs -f -n 5 web
 
 test:
-	docker compose up -d --build --remove-orphans app-web && docker exec -it app-web python manage.py test
+	docker compose up -d --build --remove-orphans web && docker exec -it web python manage.py test
 
 infra:
 	# make clean
 	docker compose up -d --build --remove-orphans app-db app-redis kafka1 zoo1
 	
 shell:
-	docker compose up -d --build --remove-orphans app-web && docker exec -it app-web python manage.py shell
+	docker compose up -d --build --remove-orphans web && docker exec -it web python manage.py shell
 
 stop:
 	docker compose down

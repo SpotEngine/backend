@@ -4,14 +4,8 @@ from django.conf import settings
 
 
 def kafka_concumer(callback: callable):
-    config = {
-        'bootstrap.servers': settings.KAFKA_BOOTSTRAP_SERVERS,
-        'group.id': 'spot-match-engine',
-        'auto.offset.reset': 'earliest',
-        'session.timeout.ms': 1000,
-        'heartbeat.interval.ms': 3000,
-        # 'group.instance.id': 'spot-match-engine-instance-1',  # should be unique for each instance
-    }
+    config = settings.KAFKA_CONSUMER_CONFIG
+    config['group.id'] = 'spot-match-engine'
     c = Consumer(config)
     topics = [KafkaSpotQueue.SPOT_MATCH_ENGINE]
     c.subscribe(topics)

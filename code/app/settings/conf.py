@@ -77,4 +77,23 @@ KAFKA_BOOTSTRAP_SERVERS = ','.join([
     f"{bootstrap_server['host']}:{bootstrap_server['port']}" for bootstrap_server in _KAFKA_SERVERS if bootstrap_server['host']]
 )
 
-print("KAFKA_BOOTSTRAP_SERVERS", KAFKA_BOOTSTRAP_SERVERS)
+KAFKA_API_KEY = os.environ['KAFKA_API_KEY']
+KAFKA_API_SECRET = os.environ['KAFKA_API_SECRET']
+KAFKA_BASE_CONF = {
+    'bootstrap.servers': KAFKA_BOOTSTRAP_SERVERS,
+    'security.protocol': 'SASL_SSL',
+    'sasl.mechanism': 'PLAIN',  # or 'SCRAM-SHA-256' depending on your setup
+    'sasl.username': KAFKA_API_KEY,
+    'sasl.password': KAFKA_API_SECRET,
+    # 'client.id': f'client-{os.uname().nodename}',  # Use hostname as client ID
+}
+KAFKA_CONSUMER_CONFIG = {
+    **KAFKA_BASE_CONF, 
+    'group.instance.id': f'instance-{os.uname().nodename}',  # Use hostname as client ID
+    'auto.offset.reset': 'earliest',
+    'session.timeout.ms': 6000,
+    'heartbeat.interval.ms': 3000,    
+}
+KAFKA_PRODUCER_CONFIG = {
+    **KAFKA_BASE_CONF, 
+}
