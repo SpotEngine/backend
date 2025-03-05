@@ -34,8 +34,8 @@ api_urlpatterns = [
 ]
 
 app_urls = [
-    path('admin/', admin.site.urls),
-    path('api/v1/', include(api_urlpatterns)),
+   path('admin/', admin.site.urls),
+   path('api/v1/', include(api_urlpatterns)),
    path('health-check/', lambda request: JsonResponse({'status': 'ok'})),
 ]
 
