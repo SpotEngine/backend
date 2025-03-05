@@ -4,7 +4,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings
-
+from django.http import JsonResponse
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -31,6 +31,7 @@ api_urlpatterns = [
    path('auth/', include('aaa.urls')),
    path('spot/', include('spot.urls')),
    path('wallet/', include('wallet.urls')),
+   path('health-check/', lambda request: JsonResponse({'status': 'ok'})),
 ]
 
 app_urls = [
