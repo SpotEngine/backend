@@ -31,12 +31,12 @@ api_urlpatterns = [
    path('auth/', include('aaa.urls')),
    path('spot/', include('spot.urls')),
    path('wallet/', include('wallet.urls')),
-   path('health-check/', lambda request: JsonResponse({'status': 'ok'})),
 ]
 
 app_urls = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(api_urlpatterns)),
+   path('health-check/', lambda request: JsonResponse({'status': 'ok'})),
 ]
 
 urlpatterns = app_urls
