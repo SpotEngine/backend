@@ -13,7 +13,7 @@ db:
 	docker compose up -d app-db 
 
 dev:
-	docker compose up -d --build --remove-orphans web nginx spot && docker compose logs -f -n 5 
+	docker compose up -d --build --remove-orphans web nginx spot app-redis && docker compose logs -f -n 5 
 
 dev-web:
 	docker compose up -d --build --remove-orphans web && docker logs -f -n 5 web
