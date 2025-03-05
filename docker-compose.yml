@@ -30,8 +30,8 @@ services:
     volumes:
       - ./static:/nginx/static
       - ./configs/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./app.crt:/etc/app.crt
-      - ./app.key:/etc/app.key
+      - ./app.crt:/nginx/app.crt
+      - ./app.key:/nginx/app.key
     # depends_on:
     #   - app-web
 
